@@ -12,8 +12,8 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <div className={inter.className}>
        <Head>
-        <title>News Fetch</title>
-        <meta name="description" content="Fetching news from the world wide web" />
+        <title key="title">News Fetch</title>
+        <meta name="description" key="description" content="Fetching news from the world wide web" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
