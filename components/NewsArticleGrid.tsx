@@ -3,14 +3,14 @@ import { NewsArticle } from "../models/NewsArticle";
 import NewsArticleEntry from "./NewsArticleEntry";
 
 interface NewsArticleGridProps {
-    article: NewsArticle[];
+    articles: NewsArticle[];
 }
 
 
-const NewsArticleGrid = ({ article }: NewsArticleGridProps) => {
+const NewsArticleGrid = ({ articles }: NewsArticleGridProps) => {
     return ( 
         <Row xs={1} sm={2} xl={4} className="g-4">
-            {article.map(article => (
+            {articles.map(article => (
                 <Col key={article.url}>
                     <NewsArticleEntry article={article}/>
                 </Col>

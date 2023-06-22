@@ -1,6 +1,7 @@
 import { FormEvent, useState } from 'react'
 import { NewsArticle } from '../../models/NewsArticle';
-import { Form, Button } from 'react-bootstrap'
+import { Form, Button, Spinner } from 'react-bootstrap'
+import NewsArticleGrid from '../../components/NewsArticleGrid';
 
 const SearchNewsPage = () => {
   // Search Results can either be an array of NewsArticle or Null. 
@@ -16,10 +17,23 @@ const SearchNewsPage = () => {
     const searchQuery = formData.get("searchQuery")?.toString().trim();
 
     if (searchQuery) {
-      alert(searchQuery)
+      try {
+        setSearchResults(null);
+        setSearchResultsIsLoadingIsError(false);
+        setSearchResultsIsLoading(true);
+        const response = await fetch('/api/search-news?q=' + searchQuery)
+        const articles: NewsArticle[] = await response.json();
+        setSearchResults(articles);
+
+      } catch(error) {
+          console.error(error);
+          setSearchResultsIsLoadingIsError(true)
+      } // After both try and catch end 
+      finally {
+        setSearchResultsIsLoading(false)
+      }
     }
   }
-
 
   return (
     <main>
@@ -31,6 +45,12 @@ const SearchNewsPage = () => {
         </Form.Group>
         <Button type="submit" className='mb-3' disabled={searchResultsIsLoading}>Search</Button>
       </Form>
+      <div className="d-flex flex-column align-items-center">
+        {searchResultsIsLoading && <Spinner animation='border'/>}
+        {searchResultsIsLoadingIsError && <p>Something went wrong. Please try again.</p>}
+        {searchResults?.length === 0 && <p>Nothing found. Try a different query.</p>} 
+        {searchResults && <NewsArticleGrid articles={searchResults}/>}
+      </div>
     </main>
   );
 };

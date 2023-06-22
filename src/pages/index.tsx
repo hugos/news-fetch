@@ -4,6 +4,7 @@ import { GetServerSideProps } from "next";
 import { NewsArticle, NewsResponse } from "../../models/NewsArticle";
 import NewsArticleEntry from "../../components/NewsArticleEntry";
 import NewsArticleGrid from "../../components/NewsArticleGrid";
+import { Button } from "react-bootstrap";
 interface BreakingNewsPageProps {
   newsArticles: NewsArticle[],
 }
@@ -26,9 +27,11 @@ export default function BreakingNewsPage({newsArticles}: BreakingNewsPageProps) 
     <Head>
       <title key="title">Breaking News</title>
     </Head>
-      <h1>Breaking News</h1>
-      {/* {JSON.stringify(newsArticles)} */}
-      <NewsArticleGrid article={newsArticles}/>
+      <div className="d-flex flex-row justify-content-between align-items-center mb-5">
+        <h1>Breaking News</h1>
+        <Button href="/search">Search</Button>
+      </div>
+      <NewsArticleGrid articles={newsArticles}/>
     </>
   );
 }
