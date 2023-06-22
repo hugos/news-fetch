@@ -2,7 +2,8 @@ import Head from "next/head";
 import { Inter } from "next/font/google";
 import { GetServerSideProps } from "next";
 import { NewsArticle, NewsResponse } from "../../models/NewsArticle";
-
+import NewsArticleEntry from "../../components/NewsArticleEntry";
+import NewsArticleGrid from "../../components/NewsArticleGrid";
 interface BreakingNewsPageProps {
   newsArticles: NewsArticle[],
 }
@@ -26,7 +27,8 @@ export default function BreakingNewsPage({newsArticles}: BreakingNewsPageProps) 
       <title key="title">Breaking News</title>
     </Head>
       <h1>Breaking News</h1>
-      {JSON.stringify(newsArticles)}
+      {/* {JSON.stringify(newsArticles)} */}
+      <NewsArticleGrid article={newsArticles}/>
     </>
   );
 }
