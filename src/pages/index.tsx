@@ -29,7 +29,6 @@ export default function BreakingNewsPage({newsArticles}: BreakingNewsPageProps) 
     </Head>
       <div className="d-flex flex-row justify-content-between align-items-center mb-5">
         <h1>Breaking News</h1>
-        <Button href="/search">Search</Button>
       </div>
       <NewsArticleGrid articles={newsArticles}/>
     </>

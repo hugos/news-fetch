@@ -2,6 +2,7 @@ import { FormEvent, useState } from 'react'
 import { NewsArticle } from '../../models/NewsArticle';
 import { Form, Button, Spinner } from 'react-bootstrap'
 import NewsArticleGrid from '../../components/NewsArticleGrid';
+import Head from 'next/head';
 
 const SearchNewsPage = () => {
   // Search Results can either be an array of NewsArticle or Null. 
@@ -36,6 +37,10 @@ const SearchNewsPage = () => {
   }
 
   return (
+    <>
+    <Head>
+      <title key="title">Search News</title>
+    </Head>
     <main>
       <h1>Search News</h1>
       <Form onSubmit={handleSubmit}>
@@ -52,6 +57,7 @@ const SearchNewsPage = () => {
         {searchResults && <NewsArticleGrid articles={searchResults}/>}
       </div>
     </main>
+    </>
   );
 };
 
