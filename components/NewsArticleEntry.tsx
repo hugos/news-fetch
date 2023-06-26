@@ -22,10 +22,11 @@ const NewsArticleEntry = ({
       : undefined;
 
   return (
+    // TODO: Make only News Outlet clickable. Also add a little link icon for UX.
     <>
     <a href={url}>
       <Card className="h-100">
-        <Image className={`card-img-top ${styles.image}`} src={validImageUrl || placeholderimage2} width={500} height={200} alt="Article Image"/>
+        <Image className={`card-img-top ${styles.image}`} src={validImageUrl || ''} width={500} height={200} alt="Article Image"/>
         <Card.Body>
           <Card.Title>{title}</Card.Title>
           <Card.Subtitle className="mt-3 mb-3">{name}</Card.Subtitle>

@@ -1,8 +1,10 @@
 import { FormEvent, useState } from 'react'
 import { NewsArticle } from '../../models/NewsArticle';
-import { Form, Button, Spinner } from 'react-bootstrap'
+import { Form, Spinner } from 'react-bootstrap'
 import NewsArticleGrid from '../../components/NewsArticleGrid';
 import Head from 'next/head';
+import { primaryColor } from '@/styles/colors';
+import {Button} from 'react-bootstrap';
 
 const SearchNewsPage = () => {
   // Search Results can either be an array of NewsArticle or Null. 
@@ -48,7 +50,7 @@ const SearchNewsPage = () => {
             <Form.Label>Search Query</Form.Label>
             <Form.Control name="searchQuery" placeholder="E.g. politics, sports, ..."/>
         </Form.Group>
-        <Button type="submit" className='mb-3' disabled={searchResultsIsLoading}>Search</Button>
+        <Button variant='custom' type="submit" className="mb-3 test-button" disabled={searchResultsIsLoading}>Search</Button>
       </Form>
       <div className="d-flex flex-column align-items-center">
         {searchResultsIsLoading && <Spinner animation='border'/>}
