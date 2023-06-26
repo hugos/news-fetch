@@ -30,7 +30,7 @@ export default function BreakingNewsPage({
       <Head>
         <title key="title">Breaking News</title>
       </Head>
-      <div className="d-flex flex-row justify-content-between align-items-center mb-5">
+      <div className="d-flex flex-row justify-content-center align-items-center mb-5">
         <h1>Breaking News</h1>
       </div>
       <NewsArticleGrid articles={newsArticles} />
