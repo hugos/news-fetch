@@ -1,0 +1,22 @@
+.sourceButton {
+    background-color: #1f1f1f;
+    border-radius: 2rem;
+    width: auto;
+    color: white;
+    font-size: 13px;
+    margin: 0 2px;
+}
+
+.sourceButton:hover {
+    background-color: #da4933;
+    color: white;
+}
+
+.sourceButton.active {
+    background-color: #da4933;
+    border-radius: 2rem;
+    width: auto;
+    color: white;
+    font-size: 13px;
+    margin: 0 2px;
+}

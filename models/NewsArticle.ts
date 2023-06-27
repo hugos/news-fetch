@@ -8,6 +8,7 @@ export interface NewsArticle {
   publishedAt: string;
   content: string;
   source: {
+    id: string;
     name: string;
   };
 }
