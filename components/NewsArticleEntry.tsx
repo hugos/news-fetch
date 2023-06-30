@@ -35,7 +35,7 @@ const NewsArticleEntry = ({
           alt="Article Image"
         />
         <Card.Body>
-          <Card.Title>{title}</Card.Title>
+          <Card.Title className={styles.cardTitle}>{title}</Card.Title>
           <Card.Subtitle className="mt-3 mb-3 d-flex justify-content-between">
             {name}
             <Button variant="custom" className="arrow-button">
