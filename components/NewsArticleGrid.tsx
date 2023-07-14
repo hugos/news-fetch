@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Col, Row, Button } from "react-bootstrap";
 import { NewsArticle } from "../models/NewsArticle";
 import NewsArticleEntry from "./NewsArticleEntry";
-import styles from '@/styles/NewsArticleGrid.module.css'
+import styles from "@/styles/NewsArticleGrid.module.css";
 
 interface NewsArticleGridProps {
   articles: NewsArticle[];
@@ -15,10 +15,10 @@ const NewsArticleGrid = ({ articles }: NewsArticleGridProps) => {
   );
   const sourceIdToNameMap = new Map();
   articles.forEach((article) => {
-  const { id, name } = article.source;
-  sourceIdToNameMap.set(id, name);
-});
-const names = Array.from(sourceIdToNameMap.values());
+    const { id, name } = article.source;
+    sourceIdToNameMap.set(id, name);
+  });
+  const names = Array.from(sourceIdToNameMap.values());
 
   // Filtering articles array to check if they have valid images
   const validArticles = articles.filter((article) => {
@@ -50,23 +50,28 @@ const names = Array.from(sourceIdToNameMap.values());
   return (
     <>
       <div className="source-list">
-        {sourceIds.filter((id, index) => id).map((id, index) => (
-          <Button
-            key={id}
-            variant="custom"
-            className={`${styles.sourceButton} ${filteredBySource.length > 0 && filteredBySource[0].source.id === id ? `${styles.active}`: ""}`}
-            onClick={() => filterArticlesBySource(id)}
-          >
-            {sourceIdToNameMap.get(id)}
-          </Button>
-        ))}
+        {sourceIds
+          .filter((id, index) => id)
+          .map((id, index) => (
+            <Button
+              key={id}
+              variant="custom"
+              className={`${styles.sourceButton} ${
+                filteredBySource.length > 0 &&
+                filteredBySource[0].source.id === id
+                  ? `${styles.active}`
+                  : ""
+              }`}
+              onClick={() => filterArticlesBySource(id)}
+            >
+              {sourceIdToNameMap.get(id)}
+            </Button>
+          ))}
       </div>
       <Row xs={1} sm={2} xl={4} className="g-4 mt-2">
         {renderArticles.map((article) => (
-          <Col key={article.url}>
-            <NewsArticleEntry
-              article={article}
-            /> 
+          <Col key={article.url} className={`${styles.newsCard}`}>
+            <NewsArticleEntry article={article} />
           </Col>
         ))}
       </Row>

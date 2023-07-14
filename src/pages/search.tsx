@@ -1,16 +1,18 @@
-import { FormEvent, useState } from 'react'
-import { NewsArticle } from '../../models/NewsArticle';
-import { Form, Spinner } from 'react-bootstrap'
-import NewsArticleGrid from '../../components/NewsArticleGrid';
-import Head from 'next/head';
-import { primaryColor } from '@/styles/colors';
-import {Button} from 'react-bootstrap';
+import { FormEvent, useState } from "react";
+import { NewsArticle } from "../../models/NewsArticle";
+import { Form, Spinner } from "react-bootstrap";
+import NewsArticleGrid from "../../components/NewsArticleGrid";
+import Head from "next/head";
+import { Button } from "react-bootstrap";
 
 const SearchNewsPage = () => {
-  // Search Results can either be an array of NewsArticle or Null. 
-  const [ searchResults, setSearchResults ] = useState<NewsArticle[] | null>(null);
-  const [ searchResultsIsLoading, setSearchResultsIsLoading ] = useState(false);
-  const [ searchResultsIsLoadingIsError, setSearchResultsIsLoadingIsError ] = useState(false);
+  // Search Results can either be an array of NewsArticle or Null.
+  const [searchResults, setSearchResults] = useState<NewsArticle[] | null>(
+    null
+  );
+  const [searchResultsIsLoading, setSearchResultsIsLoading] = useState(false);
+  const [searchResultsIsLoadingIsError, setSearchResultsIsLoadingIsError] =
+    useState(false);
 
   // When submitting the form:
 
@@ -24,41 +26,54 @@ const SearchNewsPage = () => {
         setSearchResults(null);
         setSearchResultsIsLoadingIsError(false);
         setSearchResultsIsLoading(true);
-        const response = await fetch('/api/search-news?q=' + searchQuery)
+        const response = await fetch("/api/search-news?q=" + searchQuery);
         const articles: NewsArticle[] = await response.json();
         setSearchResults(articles);
-
-      } catch(error) {
-          console.error(error);
-          setSearchResultsIsLoadingIsError(true)
-      } // After both try and catch end 
-      finally {
-        setSearchResultsIsLoading(false)
+      } catch (error) {
+        console.error(error);
+        setSearchResultsIsLoadingIsError(true);
+      } finally {
+        // After both try and catch end
+        setSearchResultsIsLoading(false);
       }
     }
   }
 
   return (
     <>
-    <Head>
-      <title key="title">Search News</title>
-    </Head>
-    <main>
-      <h1>Search News</h1>
-      <Form onSubmit={handleSubmit}>
-        <Form.Group className='mb-3' controlId='search-input'>
+      <Head>
+        <title key="title">Search News</title>
+      </Head>
+      <main>
+        <h1>Search News</h1>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group className="mb-3" controlId="search-input">
             <Form.Label>Search Query</Form.Label>
-            <Form.Control name="searchQuery" placeholder="E.g. politics, sports, ..."/>
-        </Form.Group>
-        <Button variant='custom' type="submit" className="mb-3 test-button" disabled={searchResultsIsLoading}>Search</Button>
-      </Form>
-      <div className="d-flex flex-column align-items-center">
-        {searchResultsIsLoading && <Spinner animation='border'/>}
-        {searchResultsIsLoadingIsError && <p>Something went wrong. Please try again.</p>}
-        {searchResults?.length === 0 && <p>Nothing found. Try a different query.</p>} 
-        {searchResults && <NewsArticleGrid articles={searchResults}/>}
-      </div>
-    </main>
+            <Form.Control
+              name="searchQuery"
+              placeholder="E.g. politics, sports, ..."
+            />
+          </Form.Group>
+          <Button
+            variant="custom"
+            type="submit"
+            className="mb-3 test-button"
+            disabled={searchResultsIsLoading}
+          >
+            Search
+          </Button>
+        </Form>
+        <div className="d-flex flex-column align-items-center">
+          {searchResultsIsLoading && <Spinner animation="border" />}
+          {searchResultsIsLoadingIsError && (
+            <p>Something went wrong. Please try again.</p>
+          )}
+          {searchResults?.length === 0 && (
+            <p>Nothing found. Try a different query.</p>
+          )}
+          {searchResults && <NewsArticleGrid articles={searchResults} />}
+        </div>
+      </main>
     </>
   );
 };

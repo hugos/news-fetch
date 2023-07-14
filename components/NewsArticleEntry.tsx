@@ -26,7 +26,7 @@ const NewsArticleEntry = ({
   return (
     // TODO: Make only News Outlet clickable. Also add a little link icon for UX.
     <>
-      <Card className="h-100">
+      <Card className={`h-100`}>
         <Image
           className={`card-img-top ${styles.image}`}
           src={validImageUrl || ""}
